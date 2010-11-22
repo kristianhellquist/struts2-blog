@@ -1,25 +1,39 @@
-<?xml version="1.0"?>
-<project name="struts2-blag" default="compile">
-  <!-- set global properties for this build -->
-  <property name="src" location="src/main"/>
-  <property name="build" location="build/main"/>
-  <property name="dist"  location="dist"/>
-  
-  <target name="clean" description="remove intermediate files">
-    <delete dir="${dist}"/>
-    <delete dir="${build}"/>
-  </target>
+#
+# Modify this file to suit your environment.  
+# The values of these properties will
+# override the values of properties of the 
+# same name in the build.xml file. 
+#
+# See build.xml for versions and descriptions 
+# of each of the required JAR files.
+#
+# Use forward slashes for path names even if
+# you are in a Windows environment!
+#
 
-  <target name="compile" description="compile the Java source code to class files">
-    <mkdir dir="${build}"/>
-    <javac srcdir="src" destdir="${build}"/>
-  </target>
 
-  <target name="war" depends="compile" description="create a war file for the application">
-    <war destfile="${dist}/${ant.project.name}.war" webxml="src/metadata/web.xml">
-    <lib dir="vendor" />
-    <classes dir="${build}"/>
-    <zipfileset dir="public" />
-    </war>
-  </target>
-</project>
+#==================== File and Directory Names ========================
+
+app.name=Hello_World_Struts2_Ant
+app.version=0.1
+
+source.home=./src
+lib.home=./WebContent/WEB-INF/lib
+#used for Jar files that are needed for compiling
+#but should not be part of the war file
+lib.external=./lib_external
+webapp.home=./WebContent
+build.home=./build
+dist.home=./dist
+
+
+
+#==================== Compilation Control Options =====================
+
+compile.debug=true
+compile.deprecation=false
+compile.optimize=true
+
+
+
+
