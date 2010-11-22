@@ -1,39 +1,121 @@
-#
-# Modify this file to suit your environment.  
-# The values of these properties will
-# override the values of properties of the 
-# same name in the build.xml file. 
-#
-# See build.xml for versions and descriptions 
-# of each of the required JAR files.
-#
-# Use forward slashes for path names even if
-# you are in a Windows environment!
-#
+<?xml version="1.0"?>
 
 
-#==================== File and Directory Names ========================
-
-app.name=Hello_World_Struts2_Ant
-app.version=0.1
-
-source.home=./src
-lib.home=./WebContent/WEB-INF/lib
-#used for Jar files that are needed for compiling
-#but should not be part of the war file
-lib.external=./lib_external
-webapp.home=./WebContent
-build.home=./build
-dist.home=./dist
+<!-- ====================================================================== 
+     Date:     January 2010
+     
+     Project:  Struts 2 Hello World
+     
+     Author:   Bruce Phillips
+     ====================================================================== -->
 
 
+	
+<project name="Hello_World_Struts2_Ant" default="archive" basedir=".">
+	
+    <description>
+           Basic Struts 2 Java Web Application
+    </description>
+	
+	<property file="build.properties"/>
+    
 
-#==================== Compilation Control Options =====================
+	
+	<!-- ==================== Clean Target ==================================== -->
 
-compile.debug=true
-compile.deprecation=false
-compile.optimize=true
+	<!--
+	  The "clean" target deletes any previous "build" and "dist" directory,
+	  so that you can be ensured the application can be built from scratch.
+	-->
+	<target name="clean" description="Delete old build and dist directories">
+		<delete dir="${dist.home}"/>
+		<delete dir="${build.home}"/>
+	</target>
 
+	<!-- ==================== Init Target ================================== -->
 
+	<!--
 
+	  The "init" target is used to create the "build" destination directory,
+	  Normally, this task is executed indirectly when needed.
+
+	-->
+	<target name="init" depends="clean"  description="Create build directory">
+		
+		<mkdir dir="${build.home}" />
+
+	</target>
+	
+	<!-- ==================== Compile Target ================================== -->
+
+	<!--
+
+	  The "compile" target transforms source files (from your "src" directory)
+	  into class files in the appropriate location in the build directory.
+	  This example assumes that you will be including your classes in an
+	  unpacked directory hierarchy under "/WEB-INF/classes".
+
+	-->
+	<target name="compile" depends="init" description="Compile Java sources">
+		
+		
+		<mkdir dir="${build.home}/WEB-INF/classes" />
+		
+		<javac srcdir="${source.home}"
+				destdir="${build.home}/WEB-INF/classes"
+				debug="${compile.debug}"
+				deprecation="${compile.deprecation}"
+				optimize="${compile.optimize}"
+			     source="1.6" target="1.6">
+			
+			<classpath>
+				<path>
+			    	<fileset dir="${lib.home}" />
+					<fileset dir="${lib.external}" />
+			    </path>
+			</classpath>
+			
+		</javac>
+
+	</target>
+	
+	<!-- ==================== Build Target ================================== -->
+
+	<!--
+
+	  The "build" target copies all non class files to build directory
+
+	-->
+	
+	<target name="build" depends="compile" description="Copies all non Java classes to build directoy">
+		<copy todir="${build.home}">
+			<fileset dir="${webapp.home}" excludes="SVN,**/*.class" />
+		</copy>
+		<copy todir="${build.home}/WEB-INF/classes">
+			<fileset dir="${source.home}" excludes="SVN,**/*.java" />
+		</copy>
+	</target>
+	
+	<!-- ==================== Archive Target ================================== -->
+
+	<!--
+
+	  The "archive" target create a binary archive of all files in build.home
+
+	-->
+
+	<target name="archive" depends="build" description="Create binary archive of all files in dist.home">
+		
+		<mkdir     dir="${dist.home}" />
+		
+		<!-- Create application WAR file -->
+	    <jar jarfile="${dist.home}/${app.name}.war"
+				basedir="${build.home}" />
+
+	</target>	
+	
+	
+  
+	
+</project>
 
