@@ -2,10 +2,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Hello World by convention plugin!</title>
+<title>Hello World ZERO</title>
 </head>
 <body>
-        <h1>Hello World by convention plugin</h1>       
+        <h1>Hello World ZERO</h1>       
         <p>The error message is ${message}</p>
 </body>
 </html>
