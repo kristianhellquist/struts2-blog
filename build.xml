@@ -1,21 +1,25 @@
 <?xml version="1.0"?>
-<project name="Hello" default="compile">
-    <target name="clean" description="remove intermediate files">
-        <delete dir="classes"/>
-    </target>
-    <target name="clobber" depends="clean" description="remove all artifact files">
-        <delete file="hello.jar"/>
-    </target>
-    <target name="compile" description="compile the Java source code to class files">
-        <mkdir dir="classes"/>
-        <javac srcdir="src" destdir="classes"/>
-    </target>
-    <target name="jar" depends="compile" description="create a Jar file for the application">
-        <jar destfile="hello.jar">
-            <fileset dir="classes" includes="**/*.class"/>
-            <manifest>
-                <attribute name="Main-Class" value="HelloProgram"/>
-            </manifest>
-        </jar>
-    </target>
+<project name="struts2-blag" default="compile">
+  <!-- set global properties for this build -->
+  <property name="src" location="src/main"/>
+  <property name="build" location="build/main"/>
+  <property name="dist"  location="dist"/>
+  
+  <target name="clean" description="remove intermediate files">
+    <delete dir="${dist}"/>
+    <delete dir="${build}"/>
+  </target>
+
+  <target name="compile" description="compile the Java source code to class files">
+    <mkdir dir="${build}"/>
+    <javac srcdir="src" destdir="${build}"/>
+  </target>
+
+  <target name="war" depends="compile" description="create a war file for the application">
+    <war destfile="${dist}/${ant.project.name}.war" webxml="src/metadata/web.xml">
+    <lib dir="vendor" />
+    <classes dir="${build}"/>
+    <zipfileset dir="public" />
+    </war>
+  </target>
 </project>
