@@ -11,7 +11,7 @@
 
 
 	
-<project name="Hello_World_Struts2_Ant" default="archive" basedir=".">
+<project name="StrutsBlag" default="archive" basedir=".">
 	
     <description>
            Basic Struts 2 Java Web Application
