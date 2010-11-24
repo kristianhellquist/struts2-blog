@@ -62,16 +62,17 @@
 		<mkdir dir="${build.home}/WEB-INF/classes" />
 		
 		<javac srcdir="${source.home}"
-				destdir="${build.home}/WEB-INF/classes"
-				debug="${compile.debug}"
-				deprecation="${compile.deprecation}"
-				optimize="${compile.optimize}"
-			     source="1.6" target="1.6">
+                       destdir="${build.home}/WEB-INF/classes"
+                       debug="${compile.debug}"
+                       deprecation="${compile.deprecation}"
+                       optimize="${compile.optimize}"
+                       includeantruntime="false"
+                       source="1.6" target="1.6">
 			
 			<classpath>
-				<path>
+                          <path>
 			    	<fileset dir="${lib.home}" />
-					<fileset dir="${lib.external}" />
+                                <fileset dir="${lib.external}" />
 			    </path>
 			</classpath>
 			
@@ -106,14 +107,35 @@
 
 	<target name="archive" depends="build" description="Create binary archive of all files in dist.home">
 		
-		<mkdir     dir="${dist.home}" />
-		
-		<!-- Create application WAR file -->
-	    <jar jarfile="${dist.home}/${app.name}.war"
-				basedir="${build.home}" />
-
+          <mkdir dir="${dist.home}" />
+          
+          <!-- Create application WAR file -->
+          <jar jarfile="${dist.home}/${app.name}.war"
+               basedir="${build.home}" >
+          </jar>
+          
 	</target>	
-	
+        
+        
+        <target name="test" depends="build">
+          <mkdir dir="${dist.home}" />
+        
+          <manifestclasspath property="jar.classpath" jarfile="dist/${app.name}.jar">
+            <classpath>
+                <path>
+                  <fileset dir="${lib.home}" />
+                </path>
+            </classpath>
+          </manifestclasspath>
+
+          <jar destfile="dist/${app.name}.jar"
+              basedir="build/WEB-INF/classes">
+            <manifest>
+              <attribute name="Main-Class" value="com.company.util.BlogManager"/>
+              <attribute name="Class-Path" value="${jar.classpath}" />
+            </manifest>
+          </jar>
+        </target>
 	
   
 	
