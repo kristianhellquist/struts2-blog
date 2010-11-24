@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.characterEncoding">UTF-8</property>
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.url">jdbc:mysql://localhost:3306/struts_blog</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password">root</property>
+
+
+    <property name="current_session_context_class">thread</property>
+
+    <!-- JDBC connection pool (use the built-in) -->
+    <property name="connection.pool_size">1</property>
+
+    <!-- SQL dialect -->
+    <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+    <!-- Disable the second-level cache  -->
+    <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+
+    <!-- Echo all executed SQL to stdout -->
+    <property name="show_sql">true</property>
+    <mapping class="com.company.models.Blog" />
+  </session-factory>
+</hibernate-configuration>
