@@ -10,3 +10,14 @@ The backend is a struts2 application that uses the REST-plugin to simply REST-ap
 Frontend
 --------
 The frontend is backbone.js application that uses the json api to view, create and delete blogs
+
+Build
+-----
+
+Build a WAR-file in APPLICATION_ROOT/dist/:
+
+  ant
+
+Deployment
+----------
+Copy the war-file to your application server
