@@ -1,7 +1,5 @@
 $(function(){
 
-  alert("blog.js");
-
   window.Blog = Backbone.Model.extend({
     initialize: function(){
       this.collection = window.archive;
