@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Backbone Blog</title>
+    <script src="/StrutsBlag/vendor/json2.js"></script>
+    <script type"text/javascript">
+  //    alert("one");
+    </script>
+    
+    <script src="/StrutsBlag/vendor/jquery-1.4.2.js"></script>
+    <script type"text/javascript">
+    //    alert("two");
+    </script>
+  
+    
+    <script src="/StrutsBlag/vendor/underscore-1.1.0.js"></script>
+    <script type"text/javascript">
+      //  alert("three");
+    </script>
+  
+    <script src="/StrutsBlag/vendor/backbone.js"></script>
+
+    <script type"text/javascript">
+       // alert("four");
+    </script>
+
+    <script src="/StrutsBlag/blog.js"></script>
+  
+    
+    <style>
+      #archive article h1 {
+       font-size: 14px;
+      }
+      #archive {
+       float:left;
+      }
+      #article {
+        float:left;
+        margin-left: 120px;
+      }
+    </style>
+    
+  </head>
+  <body>
+    <h1>Backbone blog</h1>
+    <div id="archive">
+    </div>
+
+    <div id="article">
+    </div>
+
+    <!-- Templates -->
+    <script type="text/template" id="template-archive">
+      <section>
+        <h1>Archive</h1>
+        <% blogs.each(function(b){ %>
+        <article>
+          <h1><a href="#blogs/<%= b.id %>"><%= b.get("title") %></a></h1>
+        </article>
+        <% }); %>
+        <a href="#"class="blog-new">Add new entry</a>
+      </section>
+    </script>
+   
+    <script type="text/template" id="template-blog-show">
+      <section>
+        <h1>Blag</h1>
+        <article>
+          <h1><%= blog.get("title") %></h1>
+          <p><%= blog.get("body") %></p>
+        </article>
+      </section>
+      <span class="remove">Remove</span>
+    </script>
+ 
+    <script type="text/template" id="template-blog-new">
+      <label for="title">Title</label>
+      <input name="title" type="text"/>
+      <label for="body">Body</label>      
+      <input name="body" type="text" />
+      <input name="save" type="submit" value="Save">
+    </script>
+  
+  </body>
+
+</html>
