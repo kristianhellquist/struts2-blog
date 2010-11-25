@@ -16,7 +16,8 @@ Build
 
 Build a WAR-file in APPLICATION_ROOT/dist/:
 
-  ant
+
+  $ ant
 
 
 Deployment
