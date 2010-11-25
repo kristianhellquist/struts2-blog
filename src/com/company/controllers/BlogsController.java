@@ -11,7 +11,7 @@ public class BlogsController implements ModelDriven<Object> {
 
     private BlogManager blogManager = new BlogManager();
     private String id;
-    private Blog model;
+    private Blog model = new Blog();
     private Collection list;
 
     
@@ -22,11 +22,23 @@ public class BlogsController implements ModelDriven<Object> {
             return list;
         }
     }
+    
+    public HttpHeaders create() {
+        blogManager.save(model);
+        return new DefaultHttpHeaders("show");
+    }
+
 
     public HttpHeaders show() {
         model = blogManager.find(id);
         return new DefaultHttpHeaders("show");
     }
+
+    public HttpHeaders destroy() {
+        model = blogManager.destroy(id);
+        return new DefaultHttpHeaders("show");
+    }
+  
   
     public HttpHeaders index() {
         list = blogManager.list();

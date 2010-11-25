@@ -30,6 +30,16 @@ public class BlogManager {
         return b;
     }    
 
+    public Blog destroy(String id){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        Blog b = (Blog) session.get(Blog.class, Long.parseLong(id));
+        session.delete(b);
+        session.getTransaction().commit();
+        return b;
+    }    
+
     
     public List list(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -37,7 +47,14 @@ public class BlogManager {
         List l = session.createQuery("from Blog").list();
         session.getTransaction().commit();
         return l;
-    }    
+    }
+
+    public void save(Blog b){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        session.save(b);
+        session.getTransaction().commit();
+    }
 
     private void createAndStoreBlog(String title, String body, Date theDate) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
