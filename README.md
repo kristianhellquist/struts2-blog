@@ -18,6 +18,7 @@ Build a WAR-file in APPLICATION_ROOT/dist/:
 
   ant
 
+
 Deployment
 ----------
 Copy the war-file to your application server
