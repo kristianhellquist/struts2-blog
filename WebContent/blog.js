@@ -9,7 +9,8 @@ $(function(){
     // using Backbone's restful methods, override this to change the endpoint
     // that will be called.
     url : function() {
-      return '/StrutsBlag/blogs/'+ this.id + ".json";
+      var base = '/StrutsBlag/blogs'
+      return (this.isNew() ? base : base + '/' + this.id) + ".json";
     },
 
     validate: function(attrs){
@@ -154,7 +155,7 @@ $(function(){
         success: function(){
           (new BlogShow({ model: blog }).render());
         },
-        error: function(){
+        error: function(model, errors){
           alert("Blog doesn't exists");
         }
       });     
