@@ -14,10 +14,9 @@ The frontend is backbone.js application that uses the json api to view, create a
 Build
 -----
 
-Build a WAR-file in APPLICATION_ROOT/dist/:
+Build a WAR-file ./dist/:
 
-
-  $ ant
+    ant
 
 
 Deployment
