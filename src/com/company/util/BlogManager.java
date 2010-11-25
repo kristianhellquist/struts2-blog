@@ -12,7 +12,7 @@ public class BlogManager {
         BlogManager mgr = new BlogManager();
 
         if (args[0].equals("store")) {
-            mgr.createAndStoreBlog("My Blog", new Date());
+            mgr.createAndStoreBlog("My Blog", "Blog body", new Date());
             Blog b = mgr.find(args[1]);
             System.out.println(b);
         }
@@ -39,13 +39,14 @@ public class BlogManager {
         return l;
     }    
 
-    private void createAndStoreBlog(String title, Date theDate) {
+    private void createAndStoreBlog(String title, String body, Date theDate) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
         Blog theBlog = new Blog();
         theBlog.setTitle(title);
         theBlog.setCreatedAt(theDate);
+        theBlog.setBody(body);
         session.save(theBlog);
         session.getTransaction().commit();
     }
